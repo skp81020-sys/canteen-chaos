@@ -84,6 +84,9 @@ you noticed it.
 - Found they belong to class `.dish-body`, and in dark mode this class's text color isn't changing — stays same as light mode
 
 **Fix:**
-- In dark mode, set `.dish-body` text color to white (or light color) so it's visible against dark background
-- Left light mode styling untouched — it was already correct.
+- In dark mode, set `.dish-body` text color to white (or light color) so it's visible against dark background 
+- change the hard coded value to the variblr 
+-  Replaced color: #2b2118 with color: var(--ink).
 
+**Checked:** 
+    - verified the harmode and ligh mode in the prices and name 
