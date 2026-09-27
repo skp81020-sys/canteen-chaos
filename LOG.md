@@ -90,3 +90,7 @@ you noticed it.
 
 **Checked:** 
     - verified the harmode and ligh mode in the prices and name 
+
+**Time:**
+
+  - 20 -25 All (.dash-class - 5min code red karne me kaha kaha hai sab : 10 min )
