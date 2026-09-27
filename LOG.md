@@ -78,3 +78,12 @@ you noticed it.
 - Clicked dark mode toggle
 - Food name and price of the food are not visible clearly
 
+**Cause:**
+- Opened DevTools using F12
+- Went to the Elements tab and inspected the dish name/price
+- Found they belong to class `.dish-body`, and in dark mode this class's text color isn't changing — stays same as light mode
+
+**Fix:**
+- In dark mode, set `.dish-body` text color to white (or light color) so it's visible against dark background
+- Left light mode styling untouched — it was already correct.
+
