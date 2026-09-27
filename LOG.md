@@ -68,3 +68,13 @@ stuck is not.
 Anything not on the bug log: a problem you found yourself, a test you
 wrote, or a fix you are unsure about. Same format, plus one line on how
 you noticed it.
+
+
+
+### CC-02: "Can't read anything in dark mode"
+
+**Reproduced:**
+- Opened the site on localhost
+- Clicked dark mode toggle
+- Food name and price of the food are not visible clearly
+
