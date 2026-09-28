@@ -94,3 +94,48 @@ you noticed it.
 **Time:**
 
   - 20 -25 All (.dash-class - 5min code red karne me kaha kaha hai sab : 10 min )
+
+
+### CC-05: "The category bar scrolls away on my phone"
+
+**Reproduced:**
+Mobile view mein menu ko scroll karne par category/filter bar gayab ho ja raha tha.
+
+**Cause:**
+Category/filter bar mein sticky positioning use nahi ki gayi thi.
+
+**Fix:**
+Mobile view ke liye category/filter bar mein sticky positioning add kar di.
+- .wrap { position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+**Checked:**
+Mobile viewport par menu ko scroll karke check kiya aur verify kiya ki category/filter bar ab visible rehta hai.
+
+**Time:** 15min
+ 
+### CC-01 : "The search suggestions are behind everything"
+
+**Reproduced:**
+Search box mein kuch type karne par search suggestions doosre elements ke peeche chali ja rahi thi.
+
+**Cause:**
+`.search-wrap` ka `z-index` sirf `1` tha, jiski wajah se suggestions doosre elements ke peeche dikh rahi thi.
+
+**Fix:**
+`.search-wrap` ka `z-index` `1` se `1000` kar diya.
+
+```css
+.search-wrap {
+  position: relative;
+  z-index: 1000;
+}
+```
+
+**Checked:**
+Search karke check kiya. Ab suggestions doosre elements ke upar properly dikh rahi hain aur click bhi ho rahi hain.
+
+**Time:**
+- 10min

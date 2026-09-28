@@ -62,6 +62,10 @@ body.no-scroll {
   max-width: 1140px;
   margin: 0 auto;
   padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
 }
 
 h1,
@@ -257,6 +261,9 @@ h3 {
   gap: 10px;
   align-items: center;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+
 }
 
 .search,
@@ -1376,7 +1383,7 @@ h3 {
 
 .search-wrap {
   position: relative;
-  z-index: 1;
+  z-index: 1000;
   flex: 1;
   min-width: 200px;
 }
@@ -2015,3 +2022,5 @@ body.is-offline .site-header {
     justify-content: space-between;
   }
 }
+
+.category-bar {}
