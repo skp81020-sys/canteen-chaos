@@ -357,6 +357,7 @@ h3 {
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .dish-card.blocked {
@@ -1262,7 +1263,8 @@ h3 {
   }
 
   .name-btn {
-    width: max-content;
+    width: 100%;
+    ;
   }
 
   .dish-card img {

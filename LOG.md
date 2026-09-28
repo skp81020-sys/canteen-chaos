@@ -139,3 +139,20 @@ Search karke check kiya. Ab suggestions doosre elements ke upar properly dikh ra
 
 **Time:**
 - 10min
+
+### CC-03 : "The menu has horizontal overflow on mobile"
+
+**Reproduced:**
+Mobile screen par menu/content screen ki width se bahar ja raha tha.
+
+**Cause:**
+Mobile layout mein kuch elements apni available width se zyada space le rahe the.
+
+**Fix:**
+Mobile layout mein `.name-btn` ki width ko `100%` kiya aur `.dish-card` mein `min-width: 0` add kiya.
+
+**Checked:**
+Mobile view mein 375px width par test kiya. Ab menu screen ke andar properly fit ho raha hai aur unnecessary horizontal page scrolling nahi hai.
+
+**Time:**
+[Apna actual time]
