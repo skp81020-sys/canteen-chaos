@@ -154,5 +154,30 @@ Mobile layout mein `.name-btn` ki width ko `100%` kiya aur `.dish-card` mein `mi
 **Checked:**
 Mobile view mein 375px width par test kiya. Ab menu screen ke andar properly fit ho raha hai aur unnecessary horizontal page scrolling nahi hai.
 
-**Time:**
-[Apna actual time]
+**Time:** 15 min
+
+
+### CC-04: "The buttons don't work on my tablet"
+
+**Reproduced:**
+DevTools me width 800px rakhi. Add to Cart aur star button normal dikhe
+par click karne pe kuch nahi hua. 1000px aur 500px pe sab theek tha.
+Button ko inspect kiya to upar koi aur element dikha.
+
+**Cause:**
+style.css me `@media (min-width: 761px) and (max-width: 900px)` block
+hai. Usme `.dish-card::after` (neeche 58px ki patti) aur `.img-wrap::after`
+(top-right 52px ka box) transparent `position: absolute` layers bane the,
+jo Add to Cart aur star button ke upar baithke click rok rahe the. Isi
+wajah se bug sirf tablet width pe aata tha.
+
+**Fix:**
+Dono `::after` rules me `pointer-events: none;` add kiya, taaki click
+neeche button tak pahunche. Block hataya nahi kyunki `.blocked` ka dim
+effect rakhna tha.
+
+**Checked:**
+800px pe dono buttons chal rahe hain. 1000px aur 375px pe layout pehle
+jaisa hai. Blocked dish ka Add button abhi bhi disabled hai.
+
+**Time:** 20 min
