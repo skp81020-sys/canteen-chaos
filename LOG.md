@@ -253,3 +253,25 @@ Stock se zyada qty bhejne par 400 "only N left" aaya. Stock ke barabar
 qty par order ho gaya (201). Test ke baad `backend/data/` reset kiya.
 
 **Time:** 25 min 
+
+
+### CC-07: "Cancelling makes it worse"
+
+**Reproduced:**
+Ek dish ka order place kiya (stock 6 se 4 hua), phir order cancel kiya.
+Stock 6 par wapas aane ki jagah 2 ho gaya.
+
+**Cause:**
+`backend/logic/validation.js` ke `releaseStock()` me
+`stock: dish.stock - line.qty` likha tha. Cancel par stock wapas add
+hona chahiye tha, par minus hone se ek baar aur ghat jata tha.
+
+**Fix:**
+`-` ko `+` kiya. Logic yahin badla kyunki stock ka hisaab isi function
+se hota hai, route me sirf isko call kiya jata hai.
+
+**Checked:**
+Stock 6, order ke baad 4, cancel ke baad wapas 6. Test ke baad
+`backend/data/` reset kiya.
+
+**Time:** 15min
