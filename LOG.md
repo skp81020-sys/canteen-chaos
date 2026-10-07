@@ -229,3 +229,27 @@ agli 5 dishes aayi. Menu page par scroll karne pe aur dishes load ho rahi
 hain.
 
 **Time:** 10min
+
+### CC-06: "I ordered more than they had"
+
+**Reproduced:**
+Menu.json me ek dish ka stock dekha, phir `/api/orders` pe usse zyada
+qty bhejke order kiya. Order ban gaya (201) aur stock negative ho gaya.
+
+**Cause:**
+`backend/logic/validation.js` ke `validateLine()` me sirf stock `<= 0`
+(sold out) check hota tha, qty stock se zyada hai ya nahi ye nahi.
+`reserveStock()` bhi bina check kiye `dish.stock -= item.qty` kar deta
+tha, jabki uska comment kehta tha ki wo har line ko re-check karta hai.
+
+**Fix:**
+`validateLine()` me `qty > stock` par "only N left" error add kiya, aur
+`reserveStock()` me subtract se pehle wahi check lagaya, taaki stock
+kabhi negative na ho. Server me isliye badla kyunki stock ka sach wahi
+decide karta hai, frontend sirf dikhata hai.
+
+**Checked:**
+Stock se zyada qty bhejne par 400 "only N left" aaya. Stock ke barabar
+qty par order ho gaya (201). Test ke baad `backend/data/` reset kiya.
+
+**Time:** 25 min 
