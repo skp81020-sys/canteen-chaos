@@ -275,3 +275,28 @@ Stock 6, order ke baad 4, cancel ke baad wapas 6. Test ke baad
 `backend/data/` reset kiya.
 
 **Time:** 15min
+
+
+### CC-08: "An old coupon still works"
+
+**Reproduced:**
+Cart me Rs. 100 se upar ke dishes daalke FRESHERS24 lagaya. Rs. 30 ka
+discount mil gaya, jabki coupons.json me uska `expiresAt` 2024-09-30 hai.
+
+**Cause:**
+`backend/logic/pricing.js` ke `applyCoupon()` me `expiresAt` check hi
+nahi tha. Expiry sirf `GET /api/coupons` ki list me filter hoti hai, jo
+coupon ko dikhne se rokti hai, lagne se nahi. Code manually type karne
+par validation pass ho jati thi.
+
+**Fix:**
+`applyCoupon()` me coupon milne ke baad `expiresAt <= now` check add
+kiya, jo "has expired" error deta hai. Yahin isliye kyunki quote aur
+order dono isi function se guzarte hain, to ek jagah fix se dono raaste
+band ho gaye.
+
+**Checked:**
+FRESHERS24 ab "has expired" deta hai aur discount 0 hai. BYTE10 abhi bhi
+chal raha hai.
+
+**Time:** 22 min
