@@ -181,3 +181,51 @@ effect rakhna tha.
 jaisa hai. Blocked dish ka Add button abhi bhi disabled hai.
 
 **Time:** 20 min
+
+
+
+### CC-10: "Sorting by price is backwards"
+
+**Reproduced:**
+Menu me "Price: low to high" chuna to sabse mehnga dish pehle aaya, aur
+"high to low" me sasta pehle. `/api/menu?sort=price-asc` call karne pe
+bhi prices ulti aayi, yaani bug server me tha.
+
+**Cause:**
+`backend/logic/search.js` ke `SORTERS` me `price-asc` ka comparator
+`b.price - a.price` tha aur `price-desc` ka `a.price - b.price`. Dono
+ulte likhe the.
+
+**Fix:**
+`price-asc` ko `a.price - b.price` aur `price-desc` ko `b.price - a.price`
+kiya. Server me isliye badla kyunki sorting wahi decide hoti hai,
+frontend sirf dikhata hai.
+
+**Checked:**
+`?sort=price-asc` me prices chhoti se badi aur `price-desc` me badi se
+chhoti aa rahi hain. Baaki sorts (rating, name) waise hi chal rahe hain.
+
+**Time:** 10min
+
+### CC-09: "The menu shows more dishes than it should"
+
+**Reproduced:**
+Menu page kholne par saari dishes ek saath aa gayi. `/api/menu?limit=5`
+call karne pe `dishes` me 5 ki jagah poori list (37) aayi, jabki `total`
+aur `hasMore` sahi the.
+
+**Cause:**
+`backend/logic/search.js` ke `paginate()` me page ka slice `items` me
+ban raha tha, par return me `items: list` likha tha, yaani poori list.
+Isliye slice kabhi use hi nahi hua.
+
+**Fix:**
+Return me `items: list` ko `items` kiya. Server me isliye badla kyunki
+pagination wahi karta hai, frontend sirf jo mile wo dikhata hai.
+
+**Checked:**
+`?limit=5` me 5 dishes aayi, `total` 37 aur `hasMore: true`. `page=2` me
+agli 5 dishes aayi. Menu page par scroll karne pe aur dishes load ho rahi
+hain.
+
+**Time:** 10min
